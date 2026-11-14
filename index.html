@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBONARIUM: KYIV — THE LAST SIGNAL | Місія 01 «ОБОЛОНЬ»</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #06080A;
+    color: #D8D8CC;
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    width: 100%;
+    max-width: 860px;
+    padding: 18px 16px 6px;
+    text-align: center;
+  }
+  header h1 {
+    color: #9FE7FF;
+    font-size: 1.5rem;
+    letter-spacing: 0.35em;
+    font-weight: 600;
+  }
+  header p {
+    color: #7A7A82;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    letter-spacing: 0.12em;
+  }
+  #game {
+    width: 100%;
+    max-width: 860px;
+    aspect-ratio: 320 / 224;
+    background: #000;
+    box-shadow: 0 0 40px rgba(63, 110, 142, 0.25);
+  }
+  .help {
+    width: 100%;
+    max-width: 860px;
+    padding: 14px 16px 30px;
+    font-size: 0.82rem;
+    color: #7A7A82;
+    line-height: 1.7;
+  }
+  .help b { color: #D8D8CC; }
+  .help .k {
+    display: inline-block;
+    border: 1px solid #3E6E8E;
+    border-radius: 4px;
+    padding: 0 6px;
+    color: #9FE7FF;
+    font-family: monospace;
+  }
+  footer {
+    color: #3E4450;
+    font-size: 0.72rem;
+    padding-bottom: 24px;
+    text-align: center;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>I B O N A R I U M</h1>
+  <p>КИЇВ — ОСТАННІЙ СИГНАЛ · МІСІЯ 01 «ОБОЛОНЬ: ПЕРШИЙ ДЕНЬ» · SEGA MEGA DRIVE ROM</p>
+</header>
+
+<div id="game"></div>
+
+<div class="help">
+  <p><b>Керування</b> (класична розкладка Genesis):
+  стрілки — рух (8 напрямків),
+  <span class="k">Z</span> — атака (ніж),
+  <span class="k">X</span> — взаємодія/пошук/взяти,
+  <span class="k">пробіл</span> — швидко: інвентар, тримати — біг,
+  <span class="k">Enter</span> — пауза/підтвердити.
+  Управління можна переналаштувати в меню емулятора (іконка геймпада).</p>
+  <p><b>Ром можна запустити й на реальній консолі або в BlastEm / Genesis Plus GX / Kega Fusion</b> — файл <code>rom.bin</code> у корені репозиторію.</p>
+</div>
+
+<footer>
+  IBONARIUM: KYIV — THE LAST SIGNAL · DEMO BUILD (MISSION 01)<br>
+  ROM зібрано SGDK (C) · placeholder-графіка · 2029
+</footer>
+
+<script>
+  var EJS_player = "#game";
+  var EJS_core = "segaMD";
+  var EJS_gameName = "IBONARIUM: KYIV - THE LAST SIGNAL (Mission 01)";
+  var EJS_gameUrl = "rom.bin";
+  var EJS_patience = 8;
+  var EJS_DEBUG_XX = true;
+  var EJS_startOnLoaded = true;
+  var EJS_backgroundColor = "#06080A";
+  var EJS_defaultOptions = { "save-state-location": "browser", "webgl2Enabled": "enabled" };
+  /* keep only useful buttons */
+  var EJS_Buttons = {
+    playPause: false,
+    restart: true,
+    mute: true,
+    settings: true,
+    fullscreen: true,
+    saveState: true,
+    loadState: true,
+    saveSavFiles: true,
+    loadSavFiles: true,
+    quickSave: true,
+    quickLoad: true,
+    screenshot: true,
+    volume: true,
+    gamepad: true,
+    cheats: false,
+    netplay: false
+  };
+</script>
+<link rel="stylesheet" href="data/emulator.min.css">
+<!-- ФОЛБЕК: якщо локальні файли data/ відсутні, замініть блок нижче на:
+<script>var EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";</script>
+<script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script> -->
+<script type="module">
+import EmulatorJS from './data/emulator.min.js';
+window.EmulatorJS = EmulatorJS;
+window.EJS_emulator = new EmulatorJS(window.EJS_player, {
+    debug: false,
+    gameUrl: window.EJS_gameUrl,
+    dataPath: "data/",
+    system: window.EJS_core,
+    gameName: window.EJS_gameName,
+    buttonOpts: window.EJS_Buttons,
+    startOnLoad: window.EJS_startOnLoaded,
+    defaultOptions: window.EJS_defaultOptions,
+    backgroundColor: window.EJS_backgroundColor
+});
+</script>
+
+
+</body>
+</html>
